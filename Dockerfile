@@ -1,10 +1,9 @@
 # syntax=docker/dockerfile:1
 FROM openjdk:17
-
 WORKDIR /app
-
+#COPY .mvn/ .mvn
+#COPY mvnw pom.xml ./
+#COPY src ./src
 COPY . /app
-COPY checkstyle.xml ./
-RUN ./mvnw dependency:go-offline
-
+#RUN ./mvnw dependency:go-offline
 CMD ["./mvnw", "spring-boot:run"]

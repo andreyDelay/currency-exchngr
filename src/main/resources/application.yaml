@@ -3,9 +3,9 @@ server:
 
 spring:
   liquibase:
-    enabled: false
+    enabled: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/currency_db
+    url: jdbc:postgresql://${POSTGRES_HOST}/currency_db
     username: postgres
     password: fedor
 
