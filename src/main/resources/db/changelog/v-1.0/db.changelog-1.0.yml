@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: andrey
+      changes:
+          - sqlFile:
+                path: sql/1.0-create-currency_info-table.sql
+                relativeToChangelogFile: true
+                dbms: 'postgresql'
+                encoding: utf-8
