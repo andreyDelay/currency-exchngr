@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+
+  - changeSet:
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: select count(*) from public.currency_info
+      id: 2
+      author: andrey
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: charcode
+                  value: USD
+              - column:
+                  name: value
+                  value: 75.054
+            dbms: 'postgresql'
+            schemaName: public
+            tableName: currency_info
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: charcode
+                  value: EUR
+              - column:
+                  name: value
+                  value: 80.367
+            dbms: 'postgresql'
+            schemaName: public
+            tableName: currency_info
