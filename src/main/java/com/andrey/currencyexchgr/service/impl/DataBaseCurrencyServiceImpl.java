@@ -14,6 +14,7 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
 
     @Override
     public CurrencyRate getCurrencyRateByCode(String currencyCoe) {
-        return repository.findByCharCode(currencyCoe);
+        return repository.findByCharCode(currencyCoe)
+                .orElseThrow(() -> new RuntimeException("Rate not found"));
     }
 }
