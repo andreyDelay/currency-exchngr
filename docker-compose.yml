@@ -17,7 +17,7 @@ services:
     environment:
       POSTGRES_DB: currency_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: fedor
+      POSTGRES_PASSWORD: postgres
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - postgresql-volume:/var/lib/postgresql/data
