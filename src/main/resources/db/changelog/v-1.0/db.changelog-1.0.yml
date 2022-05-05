@@ -17,11 +17,11 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
+                  type: integer
                   constraints:
                     primaryKey: true
               - column:
-                  name: charCode
+                  name: charcode
                   type: varchar(10)
                   constraints:
                     nullable: false

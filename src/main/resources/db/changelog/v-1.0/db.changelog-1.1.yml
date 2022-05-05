@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+  - changeSet:
+      id: 2
+      author: andrey
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - sequenceExists:
+                sequenceName: currency_rate_sequence
+      changes:
+        - createSequence:
+            cacheSize: 371717
+            cycle: false
+            dataType: int
+            incrementBy: 1
+            schemaName: public
+            sequenceName: currency_rate_sequence
+            startValue: 3

@@ -9,7 +9,7 @@ databaseChangeLog:
         - sqlCheck:
             expectedResult: 0
             sql: select count(*) from public.currency_info
-      id: 2
+      id: 3
       author: andrey
       changes:
         - insert:
