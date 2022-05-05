@@ -6,7 +6,7 @@ import com.andrey.currencyexchgr.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service(value = "DB-oriented-service")
+@Service("DB-oriented-service")
 @RequiredArgsConstructor
 public class DataBaseCurrencyServiceImpl implements CurrencyService {
 
