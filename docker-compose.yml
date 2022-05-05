@@ -7,11 +7,11 @@ services:
     ports:
       - 8088:8088
     environment:
-      POSTGRES_HOST: database
+      POSTGRES_HOST: db
     depends_on:
-      - database
+      - db
 
-  database:
+  db:
     image: postgres:14
     restart: on-failure
     environment:
