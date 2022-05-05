@@ -1,6 +1,6 @@
 package com.andrey.currencyexchgr.repository;
 
-import com.andrey.currencyexchgr.model.CurrencyRate;
+import com.andrey.currencyexchgr.service.model.CurrencyRate;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

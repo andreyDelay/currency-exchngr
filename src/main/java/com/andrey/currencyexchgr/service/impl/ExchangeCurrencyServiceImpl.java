@@ -2,7 +2,7 @@ package com.andrey.currencyexchgr.service.impl;
 
 import com.andrey.currencyexchgr.dto.ConvertedCurrencyDto;
 import com.andrey.currencyexchgr.dto.ExchangeMoneyRequestDto;
-import com.andrey.currencyexchgr.model.CurrencyRate;
+import com.andrey.currencyexchgr.service.model.CurrencyRate;
 import com.andrey.currencyexchgr.service.CurrencyService;
 import com.andrey.currencyexchgr.service.ExchangeCurrencyService;
 import lombok.RequiredArgsConstructor;
