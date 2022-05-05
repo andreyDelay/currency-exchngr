@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface DataBaseCurrencyRepository extends CrudRepository<CurrencyRate, String> {
+public interface DataBaseCurrencyRepository extends CrudRepository<CurrencyRate, Long> {
 
 	Optional<CurrencyRate> findByCharCode(String charCode);
 
