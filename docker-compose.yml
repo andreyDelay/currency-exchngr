@@ -8,6 +8,9 @@ services:
       - 8088:8088
     environment:
       POSTGRES_HOST: db
+      POSTGRES_DB: currency_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     depends_on:
       - db
 
@@ -20,8 +23,8 @@ services:
       POSTGRES_PASSWORD: postgres
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-      - postgresql-volume:/var/lib/postgresql/data
+      - vol:/var/lib/postgresql/data
 volumes:
-  postgresql-volume:
+  vol:
     external: true
 
