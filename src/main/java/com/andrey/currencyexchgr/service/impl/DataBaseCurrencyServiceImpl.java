@@ -6,6 +6,8 @@ import com.andrey.currencyexchgr.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service("DB-oriented-service")
 @RequiredArgsConstructor
 public class DataBaseCurrencyServiceImpl implements CurrencyService {
@@ -13,8 +15,7 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     private final DataBaseCurrencyRepository repository;
 
     @Override
-    public CurrencyRate getCurrencyRateByCode(String currencyCoe) {
-        return repository.findByCharCode(currencyCoe)
-                .orElseThrow(() -> new RuntimeException("Rate not found"));
+    public Optional<CurrencyRate> getCurrencyRateByCode(String currencyCoe) {
+        return repository.findByCharCode(currencyCoe);
     }
 }

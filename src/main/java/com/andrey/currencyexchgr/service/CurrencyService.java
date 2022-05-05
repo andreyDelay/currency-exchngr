@@ -2,7 +2,9 @@ package com.andrey.currencyexchgr.service;
 
 import com.andrey.currencyexchgr.model.CurrencyRate;
 
+import java.util.Optional;
+
 public interface CurrencyService {
-    CurrencyRate getCurrencyRateByCode(String currencyCoe);
+    Optional<CurrencyRate> getCurrencyRateByCode(String currencyCoe);
 }
 

@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 @Service
 @RequiredArgsConstructor
 public class ExchangeCurrencyServiceImpl implements ExchangeCurrencyService {
@@ -21,13 +19,12 @@ public class ExchangeCurrencyServiceImpl implements ExchangeCurrencyService {
     @Override
     public ConvertedCurrencyDto exchangeCurrency(ExchangeMoneyRequestDto exchangeMoneyRequestDto) {
         String targetCurrencyCode = exchangeMoneyRequestDto.getTargetCurrencyCode();
-        CurrencyRate targetCurrencyData = currencyService.getCurrencyRateByCode(targetCurrencyCode);
-        if (Objects.isNull(targetCurrencyData)) {
-            throw new RuntimeException("Currency code not found");
-        }
+        CurrencyRate targetCurrencyData =
+                currencyService.getCurrencyRateByCode(targetCurrencyCode)
+                        .orElseThrow(() -> new RuntimeException("Currency code not found"));
+
         double exchangeResult =
                 exchangeCurrency(targetCurrencyData.getValue(), exchangeMoneyRequestDto.getRubBalance());
-
         return ConvertedCurrencyDto.builder()
                 .exchangeResult(exchangeResult)
                 .currencyRate(targetCurrencyData.getValue())
