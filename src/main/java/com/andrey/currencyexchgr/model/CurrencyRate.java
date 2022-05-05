@@ -1,21 +1,19 @@
 package com.andrey.currencyexchgr.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "currency_info")
-public class CurrencyRate extends BaseEntity {
+public class CurrencyRate {
 
-    @Column(name = "currency_code")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String charCode;
 
-    @Column(name = "currency_rate")
     private double value;
 }
