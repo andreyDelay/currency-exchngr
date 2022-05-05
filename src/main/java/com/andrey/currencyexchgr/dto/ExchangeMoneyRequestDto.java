@@ -1,11 +1,11 @@
 package com.andrey.currencyexchgr.dto;
 
-import lombok.Data;
+import lombok.Value;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
-@Data
+@Value
 public class ExchangeMoneyRequestDto {
 	@Min(1)
 	private double rubBalance;

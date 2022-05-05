@@ -2,8 +2,9 @@ package com.andrey.currencyexchgr.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Value;
 
-@Getter
+@Value
 @Builder
 public class ConvertedCurrencyDto {
 	private double rubBalance;
