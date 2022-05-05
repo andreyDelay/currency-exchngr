@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/convert")
 @RequiredArgsConstructor
-public class CurrencyController {
+public class ExchangeCurrencyController {
 
     private final ExchangeCurrencyService exchangeService;
 
-    @PostMapping(path = "convert/", consumes = "application/json")
+    @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public ConvertedCurrencyDto convert(@Valid @RequestBody ExchangeMoneyRequestDto exchangeMoneyRequestDto) {
         return exchangeService.exchangeCurrency(exchangeMoneyRequestDto);
