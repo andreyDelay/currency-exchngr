@@ -10,7 +10,7 @@ public interface CurrencyService {
 
     Optional<CurrencyRate> getCurrencyRateByCode(String currencyCoe);
 
-    void save(CurrencyRateDto currencyRate);
+    CurrencyRateDto save(CurrencyRateDto currencyRate);
 
     CurrencyRateDto findById(String charCode);
 
