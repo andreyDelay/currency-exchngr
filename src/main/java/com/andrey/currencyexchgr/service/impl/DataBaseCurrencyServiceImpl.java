@@ -15,24 +15,24 @@ import java.util.Optional;
 
 @Service("DB-oriented-service")
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class DataBaseCurrencyServiceImpl implements CurrencyService {
 
     private final DataBaseCurrencyRepository repository;
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<CurrencyRate> getCurrencyRateByCode(String currencyCoe) {
         return repository.findByCharCode(currencyCoe);
     }
 
     @Override
-    public void save(CurrencyRateDto currencyRateDto) {
+    @Transactional
+    public CurrencyRateDto save(CurrencyRateDto currencyRateDto) {
         repository.save(currencyRateDto.toCurrencyRate());
+        return currencyRateDto;
     }
 
     @Override
-    @Transactional(readOnly = true)
     public CurrencyRateDto findById(String charCode) {
         Optional<CurrencyRate> byCharCode = repository.findByCharCode(charCode);
         return repository.findByCharCode(charCode)
@@ -45,7 +45,6 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public CurrencyRatesDto findAll() {
         List<CurrencyRateDto> currencyRateDtoList = new ArrayList<>();
         repository.findAll().forEach(value ->
@@ -58,6 +57,7 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
+    @Transactional
     public CurrencyRateDto update(CurrencyRateDto currencyRateDto) {
         Optional<CurrencyRate> byCharCode = repository.findByCharCode(currencyRateDto.getCharCode());
         CurrencyRate currencyRate = byCharCode
@@ -68,6 +68,7 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
+    @Transactional
     public void delete(String charCode) {
         Optional<CurrencyRate> targetCurrency = repository.findByCharCode(charCode);
         CurrencyRate currencyRate = targetCurrency
