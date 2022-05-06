@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Service("DB-oriented-service")
 @RequiredArgsConstructor
+@Transactional
 public class DataBaseCurrencyServiceImpl implements CurrencyService {
 
     private final DataBaseCurrencyRepository repository;
@@ -26,7 +27,6 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    @Transactional
     public void save(CurrencyRateDto currencyRateDto) {
         repository.save(currencyRateDto.toCurrencyRate());
     }
@@ -58,7 +58,6 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    @Transactional
     public CurrencyRateDto update(CurrencyRateDto currencyRateDto) {
         Optional<CurrencyRate> byCharCode = repository.findByCharCode(currencyRateDto.getCharCode());
         CurrencyRate currencyRate = byCharCode
@@ -69,7 +68,6 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    @Transactional
     public void delete(String charCode) {
         Optional<CurrencyRate> targetCurrency = repository.findByCharCode(charCode);
         CurrencyRate currencyRate = targetCurrency
