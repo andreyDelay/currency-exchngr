@@ -7,15 +7,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "currency_info")
+@Table(name = "currency_rates")
 public class CurrencyRate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "currency_rate_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "currency_rates_sequence")
     private Long id;
-
-    @Column(name = "charcode")
     private String charCode;
-    @Column(name = "value")
     private double value;
 }
