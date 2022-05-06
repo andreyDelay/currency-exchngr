@@ -2,11 +2,12 @@ package com.andrey.currencyexchgr.service.impl;
 
 import com.andrey.currencyexchgr.dto.CurrencyRateDto;
 import com.andrey.currencyexchgr.dto.CurrencyRatesDto;
-import com.andrey.currencyexchgr.service.model.CurrencyRate;
+import com.andrey.currencyexchgr.model.CurrencyRate;
 import com.andrey.currencyexchgr.repository.DataBaseCurrencyRepository;
 import com.andrey.currencyexchgr.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +20,19 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     private final DataBaseCurrencyRepository repository;
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<CurrencyRate> getCurrencyRateByCode(String currencyCoe) {
         return repository.findByCharCode(currencyCoe);
     }
 
     @Override
+    @Transactional
     public void save(CurrencyRateDto currencyRateDto) {
         repository.save(currencyRateDto.toCurrencyRate());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CurrencyRateDto findById(String charCode) {
         Optional<CurrencyRate> byCharCode = repository.findByCharCode(charCode);
         return repository.findByCharCode(charCode)
@@ -41,6 +45,7 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CurrencyRatesDto findAll() {
         List<CurrencyRateDto> currencyRateDtoList = new ArrayList<>();
         repository.findAll().forEach(value ->
@@ -53,6 +58,7 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
+    @Transactional
     public CurrencyRateDto update(CurrencyRateDto currencyRateDto) {
         Optional<CurrencyRate> byCharCode = repository.findByCharCode(currencyRateDto.getCharCode());
         CurrencyRate currencyRate = byCharCode
@@ -63,6 +69,7 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
+    @Transactional
     public void delete(String charCode) {
         Optional<CurrencyRate> targetCurrency = repository.findByCharCode(charCode);
         CurrencyRate currencyRate = targetCurrency
