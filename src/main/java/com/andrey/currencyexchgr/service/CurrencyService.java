@@ -2,7 +2,7 @@ package com.andrey.currencyexchgr.service;
 
 import com.andrey.currencyexchgr.dto.CurrencyRateDto;
 import com.andrey.currencyexchgr.dto.CurrencyRatesDto;
-import com.andrey.currencyexchgr.service.model.CurrencyRate;
+import com.andrey.currencyexchgr.model.CurrencyRate;
 
 import java.util.Optional;
 

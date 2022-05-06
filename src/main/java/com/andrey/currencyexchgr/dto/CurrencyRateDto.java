@@ -1,6 +1,6 @@
 package com.andrey.currencyexchgr.dto;
 
-import com.andrey.currencyexchgr.service.model.CurrencyRate;
+import com.andrey.currencyexchgr.model.CurrencyRate;
 import lombok.Builder;
 import lombok.Value;
 

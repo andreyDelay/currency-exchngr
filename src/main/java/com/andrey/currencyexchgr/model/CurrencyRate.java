@@ -1,4 +1,4 @@
-package com.andrey.currencyexchgr.service.model;
+package com.andrey.currencyexchgr.model;
 
 import lombok.Data;
 
