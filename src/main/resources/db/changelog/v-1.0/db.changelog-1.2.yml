@@ -18,7 +18,7 @@ databaseChangeLog:
                   name: id
                   value: 1
               - column:
-                  name: charcode
+                  name: char_code
                   value: USD
               - column:
                   name: value
@@ -32,7 +32,7 @@ databaseChangeLog:
                   name: id
                   value: 2
               - column:
-                  name: charcode
+                  name: char_code
                   value: EUR
               - column:
                   name: value
