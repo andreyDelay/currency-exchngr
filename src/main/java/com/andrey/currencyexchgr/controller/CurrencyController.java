@@ -17,10 +17,10 @@ public class CurrencyController {
 
     private final CurrencyService currencyService;
 
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCurrency(@Valid @RequestBody CurrencyRateDto currencyRateDto) {
-        currencyService.save(currencyRateDto);
+    public CurrencyRateDto addCurrency(@Valid @RequestBody CurrencyRateDto currencyRateDto) {
+        return currencyService.save(currencyRateDto);
     }
 
     @GetMapping("/{charCode}")
@@ -36,14 +36,14 @@ public class CurrencyController {
         return currencyService.findAll();
     }
 
-    @PutMapping("/")
-    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
     public CurrencyRateDto updateCurrency(@Valid @RequestBody CurrencyRateDto currencyRateDto) {
         return currencyService.update(currencyRateDto);
     }
 
     @DeleteMapping("/{charCode}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCurrency(@Valid @Pattern(regexp = "[A-Z]{3}")
                                @PathVariable String charCode) {
         currencyService.delete(charCode);
