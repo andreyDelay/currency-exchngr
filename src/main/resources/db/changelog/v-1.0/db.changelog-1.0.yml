@@ -10,18 +10,18 @@ databaseChangeLog:
         - onFail: MARK_RAN
         - not:
             - tableExists:
-                tableName: currency_info
+                tableName: currency_rates
       changes:
         - createTable:
-            tableName: currency_info
+            tableName: currency_rates
             columns:
               - column:
                   name: id
-                  type: integer
+                  type: bigint
                   constraints:
                     primaryKey: true
               - column:
-                  name: charcode
+                  name: char_code
                   type: varchar(10)
                   constraints:
                     nullable: false
