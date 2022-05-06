@@ -2,6 +2,7 @@ package com.andrey.currencyexchgr.service.impl;
 
 import com.andrey.currencyexchgr.dto.CurrencyRateDto;
 import com.andrey.currencyexchgr.dto.CurrencyRatesDto;
+import com.andrey.currencyexchgr.dto.UpdateCurrencyDto;
 import com.andrey.currencyexchgr.model.CurrencyRate;
 import com.andrey.currencyexchgr.repository.DataBaseCurrencyRepository;
 import com.andrey.currencyexchgr.service.CurrencyService;
@@ -58,13 +59,16 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
 
     @Override
     @Transactional
-    public CurrencyRateDto update(CurrencyRateDto currencyRateDto) {
-        Optional<CurrencyRate> byCharCode = repository.findByCharCode(currencyRateDto.getCharCode());
+    public CurrencyRateDto update(String charCode, UpdateCurrencyDto updateCurrencyDto) {
+        Optional<CurrencyRate> byCharCode = repository.findByCharCode(charCode);
         CurrencyRate currencyRate = byCharCode
                 .orElseThrow(() -> new RuntimeException("Not found"));
-        currencyRate.setValue(currencyRateDto.getValue());
+        currencyRate.setValue(updateCurrencyDto.getValue());
         repository.save(currencyRate);
-        return currencyRateDto;
+        return CurrencyRateDto.builder()
+                .charCode(charCode)
+                .value(updateCurrencyDto.getValue())
+                .build();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.andrey.currencyexchgr.service;
 
 import com.andrey.currencyexchgr.dto.CurrencyRateDto;
 import com.andrey.currencyexchgr.dto.CurrencyRatesDto;
+import com.andrey.currencyexchgr.dto.UpdateCurrencyDto;
 import com.andrey.currencyexchgr.model.CurrencyRate;
 
 import java.util.Optional;
@@ -18,6 +19,6 @@ public interface CurrencyService {
 
     void delete(String charCode);
 
-    CurrencyRateDto update(CurrencyRateDto currencyRateDto);
+    CurrencyRateDto update(String charCode, UpdateCurrencyDto updateCurrencyDto);
 }
 
