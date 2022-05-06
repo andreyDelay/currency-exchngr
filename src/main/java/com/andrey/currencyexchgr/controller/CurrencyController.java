@@ -2,9 +2,11 @@ package com.andrey.currencyexchgr.controller;
 
 import com.andrey.currencyexchgr.dto.CurrencyRateDto;
 import com.andrey.currencyexchgr.dto.CurrencyRatesDto;
+import com.andrey.currencyexchgr.dto.UpdateCurrencyDto;
 import com.andrey.currencyexchgr.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,6 +15,7 @@ import javax.validation.constraints.Pattern;
 @RestController
 @RequestMapping("/api/v1/currency")
 @RequiredArgsConstructor
+@Validated
 public class CurrencyController {
 
     private final CurrencyService currencyService;
@@ -36,10 +39,11 @@ public class CurrencyController {
         return currencyService.findAll();
     }
 
-    @PutMapping
+    @PutMapping("/{charCode}")
     @ResponseStatus(HttpStatus.OK)
-    public CurrencyRateDto updateCurrency(@Valid @RequestBody CurrencyRateDto currencyRateDto) {
-        return currencyService.update(currencyRateDto);
+    public CurrencyRateDto updateCurrency(@Valid @RequestBody UpdateCurrencyDto updateCurrencyDto,
+                                          @Valid @Pattern(regexp = "[A-Z]{3}") @PathVariable String charCode) {
+        return currencyService.update(charCode, updateCurrencyDto);
     }
 
     @DeleteMapping("/{charCode}")
