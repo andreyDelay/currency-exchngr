@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  exchanger:
+    image: andreydelay/currency-exchanger
+    restart: on-failure
+    ports:
+      - 8088:8088
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: currency_rates
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    restart: on-failure
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: currency_rates
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+

@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+
+  - changeSet:
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: select count(*) from public.currency_rates
+      id: 3
+      author: andrey
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: char_code
+                  value: USD
+              - column:
+                  name: value
+                  value: 75.054
+            dbms: 'postgresql'
+            schemaName: public
+            tableName: currency_rates
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: char_code
+                  value: EUR
+              - column:
+                  name: value
+                  value: 80.367
+            dbms: 'postgresql'
+            schemaName: public
+            tableName: currency_rates
