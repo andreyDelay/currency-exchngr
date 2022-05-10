@@ -3,17 +3,12 @@ package com.andrey.currencyexchgr.service;
 import com.andrey.currencyexchgr.dto.CurrencyRateDto;
 import com.andrey.currencyexchgr.dto.CurrencyRatesDto;
 import com.andrey.currencyexchgr.dto.UpdateCurrencyDto;
-import com.andrey.currencyexchgr.model.CurrencyRate;
-
-import java.util.Optional;
 
 public interface CurrencyService {
 
-    Optional<CurrencyRate> getCurrencyRateByCode(String currencyCoe);
+    CurrencyRateDto getCurrencyRateByCode(String currencyCoe);
 
     CurrencyRateDto save(CurrencyRateDto currencyRate);
-
-    CurrencyRateDto findById(String charCode);
 
     CurrencyRatesDto findAll();
 

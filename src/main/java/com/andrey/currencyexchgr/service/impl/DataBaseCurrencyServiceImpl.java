@@ -10,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service("DB-oriented-service")
 @RequiredArgsConstructor
@@ -22,8 +20,13 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     private final DataBaseCurrencyRepository repository;
 
     @Override
-    public Optional<CurrencyRate> getCurrencyRateByCode(String currencyCoe) {
-        return repository.findByCharCode(currencyCoe);
+    public CurrencyRateDto getCurrencyRateByCode(String currencyCoe) {
+        CurrencyRate currencyRate = repository.findByCharCode(currencyCoe)
+                .orElseThrow(() -> new RuntimeException("Not found"));
+        return CurrencyRateDto.builder()
+                .charCode(currencyRate.getCharCode())
+                .value(currencyRate.getValue())
+                .build();
     }
 
     @Override
@@ -34,35 +37,24 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public CurrencyRateDto findById(String charCode) {
-        Optional<CurrencyRate> byCharCode = repository.findByCharCode(charCode);
-        return repository.findByCharCode(charCode)
-                .map(response ->
-                        CurrencyRateDto.builder()
-                        .charCode(response.getCharCode())
-                        .value(response.getValue())
-                        .build())
-                .orElseThrow(() -> new RuntimeException("Not found"));
-    }
-
-    @Override
     public CurrencyRatesDto findAll() {
-        List<CurrencyRateDto> currencyRateDtoList = new ArrayList<>();
-        repository.findAll().forEach(value ->
-                currencyRateDtoList.add(
+        List<CurrencyRateDto> result = repository.findAll()
+                .stream()
+                .map(value ->
                         CurrencyRateDto.builder()
-                        .value(value.getValue())
-                        .charCode(value.getCharCode())
-                        .build()));
-        return new CurrencyRatesDto(currencyRateDtoList);
+                                .value(value.getValue())
+                                .charCode(value.getCharCode())
+                                .build())
+                .toList();
+        return new CurrencyRatesDto(result);
     }
 
     @Override
     @Transactional
     public CurrencyRateDto update(String charCode, UpdateCurrencyDto updateCurrencyDto) {
-        Optional<CurrencyRate> byCharCode = repository.findByCharCode(charCode);
-        CurrencyRate currencyRate = byCharCode
+        CurrencyRate currencyRate = repository.findByCharCode(charCode)
                 .orElseThrow(() -> new RuntimeException("Not found"));
+
         currencyRate.setValue(updateCurrencyDto.getValue());
         repository.save(currencyRate);
         return CurrencyRateDto.builder()
@@ -74,10 +66,10 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     @Override
     @Transactional
     public void delete(String charCode) {
-        Optional<CurrencyRate> targetCurrency = repository.findByCharCode(charCode);
-        CurrencyRate currencyRate = targetCurrency
-                .orElseThrow(() -> new RuntimeException("Not found"));
-        repository.delete(currencyRate);
+        repository.findByCharCode(charCode)
+                .ifPresentOrElse(repository::delete, () -> {
+                    throw new RuntimeException("Not found");
+                });
     }
 
 }
