@@ -5,16 +5,20 @@ import lombok.Builder;
 import lombok.Value;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Value
 @Builder
 public class CurrencyRateDto {
 
+    @NotNull
     @Pattern(regexp = "[A-Z]{3}")
     private String charCode;
+
+    @NotNull
     @Min(1)
-    private double value;
+    private Double value;
 
     public CurrencyRate toCurrencyRate() {
         CurrencyRate currencyRate = new CurrencyRate();
