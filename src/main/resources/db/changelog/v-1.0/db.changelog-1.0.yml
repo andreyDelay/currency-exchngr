@@ -24,10 +24,20 @@ databaseChangeLog:
                   name: char_code
                   type: varchar(10)
                   constraints:
-                    unique: true
                     nullable: false
               - column:
                   name: value
                   type: numeric
                   constraints:
                     nullable: false
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  descending: false
+                  name: char_code
+            indexName: currency_rate_char_code_idx
+            schemaName: public
+            tableName: currency_rates
+            tablespace: pg_default
+            unique: true
