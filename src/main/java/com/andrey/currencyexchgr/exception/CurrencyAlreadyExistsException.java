@@ -1,12 +1,10 @@
 package com.andrey.currencyexchgr.exception;
 
-public class CurrencyAlreadyExistsException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+
+public class CurrencyAlreadyExistsException extends ApiException {
 
 	public CurrencyAlreadyExistsException(String message) {
-		super(message);
-	}
-
-	public CurrencyAlreadyExistsException(String message, Throwable cause) {
-		super(message, cause);
+		super("CURRENCY_ALREADY_EXISTS_ERROR", message, HttpStatus.CONFLICT);
 	}
 }
