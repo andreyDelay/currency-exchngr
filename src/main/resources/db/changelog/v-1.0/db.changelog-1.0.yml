@@ -24,6 +24,7 @@ databaseChangeLog:
                   name: char_code
                   type: varchar(10)
                   constraints:
+                    unique: true
                     nullable: false
               - column:
                   name: value
