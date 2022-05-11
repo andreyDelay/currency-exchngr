@@ -3,6 +3,8 @@ package com.andrey.currencyexchgr.service.impl;
 import com.andrey.currencyexchgr.dto.CurrencyRateDto;
 import com.andrey.currencyexchgr.dto.CurrencyRatesDto;
 import com.andrey.currencyexchgr.dto.UpdateCurrencyDto;
+import com.andrey.currencyexchgr.exception.CurrencyAlreadyExistsException;
+import com.andrey.currencyexchgr.exception.CurrencyNotFoundException;
 import com.andrey.currencyexchgr.model.CurrencyRate;
 import com.andrey.currencyexchgr.repository.DataBaseCurrencyRepository;
 import com.andrey.currencyexchgr.service.CurrencyService;
@@ -20,9 +22,11 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     private final DataBaseCurrencyRepository repository;
 
     @Override
-    public CurrencyRateDto getCurrencyRateByCode(String currencyCoe) {
-        CurrencyRate currencyRate = repository.findByCharCode(currencyCoe)
-                .orElseThrow(() -> new RuntimeException("Not found"));
+    public CurrencyRateDto getCurrencyRateByCode(String charCode) {
+        CurrencyRate currencyRate = repository.findByCharCode(charCode)
+                .orElseThrow(() -> new CurrencyNotFoundException(
+                        String.format("Currency code %s not found", charCode)));
+
         return CurrencyRateDto.builder()
                 .charCode(currencyRate.getCharCode())
                 .value(currencyRate.getValue())
@@ -32,7 +36,13 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     @Override
     @Transactional
     public CurrencyRateDto save(CurrencyRateDto currencyRateDto) {
-        repository.save(currencyRateDto.toCurrencyRate());
+        repository.findByCharCode(currencyRateDto.getCharCode()).ifPresentOrElse(
+                currencyRate -> {
+                        throw new CurrencyAlreadyExistsException(
+                                String.format("Currency, with specified code - '%s', already exists",
+                                        currencyRateDto.getCharCode()));
+                    },
+                () -> repository.save(currencyRateDto.toCurrencyRate()));
         return currencyRateDto;
     }
 
@@ -53,7 +63,8 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     @Transactional
     public CurrencyRateDto update(String charCode, UpdateCurrencyDto updateCurrencyDto) {
         CurrencyRate currencyRate = repository.findByCharCode(charCode)
-                .orElseThrow(() -> new RuntimeException("Not found"));
+                .orElseThrow(() -> new CurrencyNotFoundException(
+                        String.format("Currency code %s not found", charCode)));
 
         currencyRate.setValue(updateCurrencyDto.getValue());
         repository.save(currencyRate);
@@ -68,7 +79,7 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     public void delete(String charCode) {
         repository.findByCharCode(charCode)
                 .ifPresentOrElse(repository::delete, () -> {
-                    throw new RuntimeException("Not found");
+                    throw new CurrencyNotFoundException(String.format("Currency code %s not found", charCode));
                 });
     }
 

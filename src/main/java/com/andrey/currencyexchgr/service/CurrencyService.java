@@ -6,7 +6,7 @@ import com.andrey.currencyexchgr.dto.UpdateCurrencyDto;
 
 public interface CurrencyService {
 
-    CurrencyRateDto getCurrencyRateByCode(String currencyCoe);
+    CurrencyRateDto getCurrencyRateByCode(String charCode);
 
     CurrencyRateDto save(CurrencyRateDto currencyRate);
 
