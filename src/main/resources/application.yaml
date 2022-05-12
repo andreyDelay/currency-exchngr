@@ -17,7 +17,7 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
 api:
-  url: http://${API_URL}/
+  url: ${API_URL}
 
 logging:
   level:
