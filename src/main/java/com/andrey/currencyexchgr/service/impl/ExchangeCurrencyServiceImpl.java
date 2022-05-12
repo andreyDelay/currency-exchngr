@@ -1,32 +1,34 @@
 package com.andrey.currencyexchgr.service.impl;
 
 import com.andrey.currencyexchgr.dto.ConvertedCurrencyDto;
-import com.andrey.currencyexchgr.dto.CurrencyRateDto;
 import com.andrey.currencyexchgr.dto.ExchangeMoneyRequestDto;
-import com.andrey.currencyexchgr.service.CurrencyService;
+import com.andrey.currencyexchgr.exception.CurrencyNotFoundException;
+import com.andrey.currencyexchgr.model.CurrencyRate;
+import com.andrey.currencyexchgr.repository.ApiCurrencyRepository;
 import com.andrey.currencyexchgr.service.ExchangeCurrencyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class ExchangeCurrencyServiceImpl implements ExchangeCurrencyService {
 
-    @Qualifier("API-oriented-service")
-    private final CurrencyService currencyService;
+    private final ApiCurrencyRepository repository;
 
     @Override
     public ConvertedCurrencyDto exchangeCurrency(ExchangeMoneyRequestDto exchangeMoneyRequestDto) {
-        String targetCurrencyCode = exchangeMoneyRequestDto.getTargetCurrencyCode();
-        CurrencyRateDto targetCurrencyData = currencyService.getCurrencyRateByCode(targetCurrencyCode);
+        String charCode = exchangeMoneyRequestDto.getTargetCurrencyCode();
+        CurrencyRate currencyRate = repository.findByCurrencyCode(charCode)
+                .orElseThrow(() -> new CurrencyNotFoundException(
+                        String.format("Currency code %s not found", charCode)));
+
         double exchangeResult =
-                exchangeCurrency(targetCurrencyData.getValue(), exchangeMoneyRequestDto.getRubBalance());
+                exchangeCurrency(currencyRate.getValue(), exchangeMoneyRequestDto.getRubBalance());
         return ConvertedCurrencyDto.builder()
                 .exchangeResult(exchangeResult)
-                .currencyRate(targetCurrencyData.getValue())
+                .currencyRate(currencyRate.getValue())
                 .rubBalance(exchangeMoneyRequestDto.getRubBalance())
-                .targetCurrencyCode(targetCurrencyCode)
+                .targetCurrencyCode(charCode)
                 .build();
     }
 
