@@ -9,8 +9,6 @@ import com.andrey.currencyexchgr.service.ExchangeCurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class ExchangeCurrencyServiceImpl implements ExchangeCurrencyService {
@@ -20,7 +18,7 @@ public class ExchangeCurrencyServiceImpl implements ExchangeCurrencyService {
     @Override
     public ConvertedCurrencyDto exchangeCurrency(ExchangeMoneyRequestDto exchangeMoneyRequestDto) {
         String charCode = exchangeMoneyRequestDto.getTargetCurrencyCode();
-        CurrencyRate currencyRate = repository.findByCurrencyCode(charCode)
+        CurrencyRate currencyRate = repository.findByCharCode(charCode)
                 .orElseThrow(() -> new CurrencyNotFoundException(
                         String.format("Currency code %s not found", charCode)));
 
