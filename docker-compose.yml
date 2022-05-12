@@ -24,7 +24,3 @@ services:
   api:
     image: kegisa/currency-service
     restart: on-failure
-    expose:
-      - 8007
-    ports:
-      - 8007:8006
