@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("1")
+@Repository("Postgres-repository")
 public interface DataBaseCurrencyRepository extends CrudRepository<CurrencyRate, Long>, ApiCurrencyRepository {
 
 	List<CurrencyRate> findAll();
