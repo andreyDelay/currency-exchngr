@@ -11,7 +11,7 @@ import com.andrey.currencyexchgr.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service(value = "API-oriented")
+@Service(value = "API-oriented-service")
 @RequiredArgsConstructor
 public class ApiCurrencyServiceImpl implements CurrencyService {
 

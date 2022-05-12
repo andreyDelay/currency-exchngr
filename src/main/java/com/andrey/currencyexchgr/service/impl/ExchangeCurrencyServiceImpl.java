@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ExchangeCurrencyServiceImpl implements ExchangeCurrencyService {
 
-    @Qualifier("DB-oriented-service")
+    @Qualifier("API-oriented-service")
     private final CurrencyService currencyService;
 
     @Override
