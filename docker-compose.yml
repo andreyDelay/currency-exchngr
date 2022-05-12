@@ -5,22 +5,27 @@ services:
     build: .
     restart: on-failure
     ports:
-      - 8088:8088
+      - '8088:8088'
     environment:
+      API_URL: api
       POSTGRES_HOST: db
       POSTGRES_DB: currency_rates
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     depends_on:
       - db
+      - api
 
   db:
     image: postgres:14
     restart: on-failure
-    ports:
-      - 5432:5432
     environment:
       POSTGRES_DB: currency_rates
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
+  api:
+    image: kegisa/currency-service:latest
+    restart: on-failure
+    ports:
+      - "8006:8006"
