@@ -16,4 +16,14 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
+api:
+  url: http://${API_URL}/
+
+logging:
+  level:
+    com.andrey.currencyexchgr.repository.ApiCurrencyRepository: DEBUG
+  file:
+    name: logs/OpenFeign.log
+
+
 
