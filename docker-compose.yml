@@ -27,5 +27,3 @@ services:
   api:
     image: kegisa/currency-service:latest
     restart: on-failure
-    ports:
-      - "8006:8006"
