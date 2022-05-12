@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   exchanger:
+    image: andreydelay/currency-exchanger
     build: .
     restart: on-failure
     ports:
