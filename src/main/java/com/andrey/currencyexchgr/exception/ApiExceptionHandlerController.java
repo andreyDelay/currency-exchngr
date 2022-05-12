@@ -10,7 +10,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class ApiExceptionHandlerController extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler({CurrencyNotFoundException.class, CurrencyAlreadyExistsException.class})
+	@ExceptionHandler({CurrencyNotFoundException.class, CurrencyAlreadyExistsException.class,
+			ApiBadRequestError.class})
 	public ResponseEntity<ApiErrorMessageResponse> handleCurrencyCodeNotFound(ApiException e) {
 		ApiErrorMessageResponse apiErrorMessageResponse =
 				new ApiErrorMessageResponse(e.getCode(), e.getMessage());
