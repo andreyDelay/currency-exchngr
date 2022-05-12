@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface ApiCurrencyRepository {
 
 	@GetMapping("{charCode}")
-	Optional<CurrencyRate> findByCurrencyCode(@PathVariable String charCode);
+	Optional<CurrencyRate> findByCharCode(@PathVariable String charCode);
 }
