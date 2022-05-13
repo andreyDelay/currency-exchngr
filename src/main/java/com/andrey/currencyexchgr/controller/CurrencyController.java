@@ -18,7 +18,6 @@ import javax.validation.constraints.Pattern;
 @RequiredArgsConstructor
 public class CurrencyController {
 
-    @Qualifier("DB-oriented-service")
     private final CurrencyService currencyService;
 
     @PostMapping
