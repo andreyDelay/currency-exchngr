@@ -27,7 +27,7 @@ public class FeignConfig {
 		public Exception decode(String s, Response response) {
 			switch (response.status()) {
 				case 400 -> throw new ApiBadRequestError("Bad request to API");
-				case 404 -> throw new CurrencyNotFoundException("Target currency code not found by API");
+				case 404 -> throw new CurrencyNotFoundException("Currency code not found by API");
 				default -> {
 					return errorDecoder.decode(s, response);
 				}
