@@ -4,7 +4,7 @@ import com.andrey.currencyexchgr.dto.ConvertedCurrencyDto;
 import com.andrey.currencyexchgr.dto.ExchangeMoneyRequestDto;
 import com.andrey.currencyexchgr.exception.CurrencyNotFoundException;
 import com.andrey.currencyexchgr.model.CurrencyRate;
-import com.andrey.currencyexchgr.repository.ApiCurrencyRepository;
+import com.andrey.currencyexchgr.service.CurrencyRateSource;
 import com.andrey.currencyexchgr.service.ExchangeCurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ExchangeCurrencyServiceImpl implements ExchangeCurrencyService {
 
-    @Qualifier("Postgres-repository")
-    private final ApiCurrencyRepository repository;
+    @Qualifier("API")
+    private final CurrencyRateSource currencyRateSource;
 
     @Override
     public ConvertedCurrencyDto exchangeCurrency(ExchangeMoneyRequestDto exchangeMoneyRequestDto) {
         String charCode = exchangeMoneyRequestDto.getTargetCurrencyCode();
-        CurrencyRate currencyRate = repository.findByCharCode(charCode)
+        CurrencyRate currencyRate = currencyRateSource.findByCharCode(charCode)
                 .orElseThrow(() -> new CurrencyNotFoundException(
                         String.format("Currency code %s not found", charCode)));
 

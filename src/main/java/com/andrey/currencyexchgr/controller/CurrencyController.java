@@ -31,7 +31,7 @@ public class CurrencyController {
     @ResponseStatus(HttpStatus.OK)
     public CurrencyRateDto getCurrency(@Valid @Pattern(regexp = "[A-Z]{3}")
                                        @PathVariable String charCode) {
-        return currencyService.getCurrencyRateByCode(charCode);
+        return currencyService.findByCharCode(charCode);
     }
 
     @GetMapping

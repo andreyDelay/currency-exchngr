@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
-@FeignClient(value = "API-repository", url = "${api.url}", configuration = FeignConfig.class)
+@FeignClient(url = "${api.url}", configuration = FeignConfig.class)
 public interface ApiCurrencyRepository {
 
 	@GetMapping("{charCode}")

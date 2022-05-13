@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service("DB-oriented-service")
+@Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class DataBaseCurrencyServiceImpl implements CurrencyService {
@@ -22,7 +22,7 @@ public class DataBaseCurrencyServiceImpl implements CurrencyService {
     private final DataBaseCurrencyRepository repository;
 
     @Override
-    public CurrencyRateDto getCurrencyRateByCode(String charCode) {
+    public CurrencyRateDto findByCharCode(String charCode) {
         CurrencyRate currencyRate = repository.findByCharCode(charCode)
                 .orElseThrow(() -> new CurrencyNotFoundException(
                         String.format("Currency code %s not found", charCode)));
