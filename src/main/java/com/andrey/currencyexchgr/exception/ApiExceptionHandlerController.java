@@ -12,7 +12,7 @@ public class ApiExceptionHandlerController extends ResponseEntityExceptionHandle
 
 	@ExceptionHandler({CurrencyNotFoundException.class, CurrencyAlreadyExistsException.class,
 			ApiBadRequestError.class})
-	public ResponseEntity<ApiErrorMessageResponse> handleCurrencyCodeNotFound(ApiException e) {
+	public ResponseEntity<ApiErrorMessageResponse> handleCurrencyCodeErrors(ApiException e) {
 		ApiErrorMessageResponse apiErrorMessageResponse =
 				new ApiErrorMessageResponse(e.getCode(), e.getMessage());
 		return new ResponseEntity<>(apiErrorMessageResponse, e.getHttpStatus());
