@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+
+  - changeSet:
+      id: 4
+      author: andrey
+      changes:
+        - sqlFile:
+            dbms: '!h2,  oracle,  mysql'
+            path: /db/changelog/v-1.0/test.sql

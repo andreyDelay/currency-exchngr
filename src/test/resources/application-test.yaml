@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver: org.h2.Driver
+    url: jdbc:h2:mem:currency_db;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS public
+    username: postgres
+    password: postgres
+  liquibase:
+    default-schema: public
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  jpa:
+    hibernate:
+      show_sql: true
+      ddl-auto: validate
+      dialect: org.hibernate.dialect.H2Dialect
+
+api:
+  url: http://localhost:8006/rates/
+
+logging:
+  level:
+    com.andrey.currencyexchgr: DEBUG
+  file:
+    name: logs/testLog.log
