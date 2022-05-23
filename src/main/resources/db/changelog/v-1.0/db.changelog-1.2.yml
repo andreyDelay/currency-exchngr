@@ -23,7 +23,7 @@ databaseChangeLog:
               - column:
                   name: value
                   value: 75.054
-            dbms: '!h2, postgresql'
+            dbms: 'h2, postgresql'
             schemaName: public
             tableName: currency_rates
         - insert:
@@ -37,6 +37,6 @@ databaseChangeLog:
               - column:
                   name: value
                   value: 80.367
-            dbms: '!h2, postgresql'
+            dbms: 'h2, postgresql'
             schemaName: public
             tableName: currency_rates

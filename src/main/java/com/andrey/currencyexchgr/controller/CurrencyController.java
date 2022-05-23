@@ -5,7 +5,6 @@ import com.andrey.currencyexchgr.dto.CurrencyRatesDto;
 import com.andrey.currencyexchgr.dto.UpdateCurrencyDto;
 import com.andrey.currencyexchgr.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
