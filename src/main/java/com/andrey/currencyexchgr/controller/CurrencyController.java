@@ -6,6 +6,7 @@ import com.andrey.currencyexchgr.dto.UpdateCurrencyDto;
 import com.andrey.currencyexchgr.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Pattern;
 @RestController
 @RequestMapping("/api/v1/currency")
 @RequiredArgsConstructor
+@Validated
 public class CurrencyController {
 
     private final CurrencyService currencyService;
