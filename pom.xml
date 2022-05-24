@@ -18,6 +18,9 @@
 		<java.version>17</java.version>
 		<spring-cloud.version>2021.0.2</spring-cloud.version>
 		<open-api-version>1.6.8</open-api-version>
+		<hamcrest-version>2.2</hamcrest-version>
+		<assertj-core.version>3.22.0</assertj-core.version>
+		<mockito-junit-jupiter.version>4.5.1</mockito-junit-jupiter.version>
 	</properties>
 
 	<dependencies>
@@ -64,19 +67,20 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>4.5.1</version>
+			<version>${mockito-junit-jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<version>3.22.0</version>
+			<version>${assertj-core.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jooq</groupId>
-			<artifactId>jooq</artifactId>
-			<version>3.16.6</version>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
+			<version>${hamcrest-version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>

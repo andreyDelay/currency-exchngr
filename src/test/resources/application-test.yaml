@@ -20,6 +20,9 @@ controllers:
   exchangerUrl: /api/v1/convert
   testCharCodeString: TBA
   testCharCodeValue: 77.0
+  notValidRateValue: 0.0
+  notValidCharCode: TEST
+  notExistingCharCode: QQQ
 
 logging:
   level:
