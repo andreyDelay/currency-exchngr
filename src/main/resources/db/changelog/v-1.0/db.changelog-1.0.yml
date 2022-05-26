@@ -27,7 +27,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: value
-                  type: numeric
+                  type: double precision
                   constraints:
                     nullable: false
         - createIndex:

@@ -8,10 +8,9 @@ spring:
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL95Dialect
-        show_sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL95Dialect
+      show_sql: true
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
