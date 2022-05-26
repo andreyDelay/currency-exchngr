@@ -15,15 +15,6 @@ spring:
 api:
   url: http://localhost:8006/rates/
 
-controllers:
-  currencyControllerUrl: /api/v1/currency
-  exchangerUrl: /api/v1/convert
-  testCharCodeString: TBA
-  testCharCodeValue: 77.0
-  notValidRateValue: 0.0
-  notValidCharCode: TEST
-  notExistingCharCode: QQQ
-
 logging:
   level:
     com.andrey.currencyexchgr: DEBUG

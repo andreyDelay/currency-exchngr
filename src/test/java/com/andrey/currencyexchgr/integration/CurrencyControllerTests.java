@@ -8,13 +8,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
@@ -29,9 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestPropertySource("/application-test.yaml")
 @ActiveProfiles("test")
-@ComponentScan(lazyInit = true)
 class CurrencyControllerTests {
 
 	@Autowired
@@ -39,23 +34,17 @@ class CurrencyControllerTests {
 	@Autowired
 	private CurrencyController controller;
 
-	@Value("${controllers.testCharCodeString}")
-	private String testCharCodeStringValue;
+	private String testCharCodeStringValue = "TBA";
 
-	@Value("${controllers.testCharCodeValue}")
-	private double testCharCodeDoubleValue;
+	private double testCharCodeDoubleValue = 77.0;
 
-	@Value("${controllers.currencyControllerUrl}")
-	private String currencyControllerUrl;
+	private String currencyControllerUrl = "/api/v1/currency";
 
-	@Value("${controllers.notValidCharCode}")
-	private String notValidCharCode;
+	private String notValidCharCode = "TEST";
 
-	@Value("${controllers.notValidRateValue}")
-	private double notValidRateValue;
+	private double notValidRateValue = 0.0;
 
-	@Value("${controllers.notExistingCharCode}")
-	private String notExistingCharCode;
+	private String notExistingCharCode = "QQQ";
 
 	private CurrencyRateDto createTestCurrencyDto() {
 		return CurrencyRateDto.builder()
